@@ -31,7 +31,10 @@ public class RabbitMQProducer implements Serializable {
   }
 
   public void send(Message message) {
-    if (message == Message.NONE) return;
+    if (message == Message.NONE) {
+      logger.warn("Message is empty. Skipping publish");
+      return;
+    }
     sendMessageWhenNotBlocked((Message.MessageForSending) message);
   }
 
@@ -59,6 +62,8 @@ public class RabbitMQProducer implements Serializable {
                                                                 .expiration(message.getExpiration())
                                                                 .build();
       channel.basicPublish(message.getExchangeName(), message.getRoutingKey(), properties, message.getBody());
+      logger.info("Sent message to exchange {} with routingKey of {}", message.getExchangeName(),
+              message.getRoutingKey());
     } catch (AlreadyClosedException ace) {
       logger.error("already closed exception while attempting to send message", ace);
       reset();
