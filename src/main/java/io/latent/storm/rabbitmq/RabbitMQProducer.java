@@ -31,7 +31,10 @@ public class RabbitMQProducer implements Serializable {
   }
 
   public void send(Message message) {
-    if (message == Message.NONE) return;
+    if (message == Message.NONE) {
+      logger.warn("Message is empty. Skipping publish");
+      return;
+    }
     sendMessageWhenNotBlocked((Message.MessageForSending) message);
   }
 
