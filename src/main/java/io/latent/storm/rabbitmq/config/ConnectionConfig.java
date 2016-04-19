@@ -312,10 +312,8 @@ public class ConnectionConfig implements Serializable {
             } else {
                 // use default jdk truststore
                 try {
-                    factory.useSslProtocol();
+                    factory.useSslProtocol(SSLContext.getDefault());
                 } catch (NoSuchAlgorithmException e) {
-                    throw new RuntimeException(e);
-                } catch (KeyManagementException e) {
                     throw new RuntimeException(e);
                 }
             }
