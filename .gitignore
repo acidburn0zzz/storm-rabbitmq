@@ -2,6 +2,7 @@
 .idea/
 *.iml
 *.iws
+settings-priv.xml
 
 # Eclipse
 .classpath
