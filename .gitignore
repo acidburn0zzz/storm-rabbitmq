@@ -1,3 +1,18 @@
-target/
+# Intellij
 .idea/
 *.iml
+*.iws
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Mac
+.DS_Store
+
+# Maven
+logs/
+target/
+dist/
+bin/
